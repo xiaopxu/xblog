@@ -3,23 +3,25 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import iView from 'iview'
-import 'iview/dist/styles/iview.css'
-
+// import iView from 'iview'
+// import 'iview/dist/styles/iview.css'
+import element from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
 //引入自定义插件
 import http from './util/http.js'
 
-Vue.use(iView);
-Vue.use(http)
+// Vue.use(iView);
+Vue.use(http);
+Vue.use(element);
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: {
-    App
-  }
+    el: '#app',
+    router,
+    template: '<App/>',
+    components: {
+        App
+    }
 })

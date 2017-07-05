@@ -1,5 +1,5 @@
 <template>
-    <div id="login">
+    <div id="sign-in">
         <h3>用户登录</h3>
         <router-link to="/signup">注册</router-link>
     </div>
@@ -10,6 +10,15 @@ export default {
         return {
 
         }
+    },
+    created() {
+
+    },
+    mounted() {
+
+    },
+    methods: {
+
     }
 }
 </script>
