@@ -6,7 +6,11 @@ import router from './router'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 
+//引入自定义插件
+import http from './util/http.js'
+
 Vue.use(iView);
+Vue.use(http)
 
 Vue.config.productionTip = false
 

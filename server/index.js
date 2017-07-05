@@ -1,56 +1,33 @@
-//获取path
-const path = require('path')
-//获取fs
+// 引入api模块
+const api = require('./api')
+// 引入文件模块
 const fs = require('fs')
-//获取koa2
-const Koa = require('koa2')
-//实例化koa2
-const app = new Koa()
+// 引入处理路径的模块
+const path = require('path')
+// 引入处理post数据的模块
+const bodyParser = require('body-parser')
+// 引入Express
+const express = require('express')
+const app = express()
 
-const Router = require('koa-router')
-const router = new Router()
+//挂载
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+  extended: false
+}))
+app.use(api)
 
-const koaStatic = require('koa-static')
-const json = require('koa-json');
-const bodyparser = require('koa-bodyparser')();
-const logger = require('koa-logger');
-const resolve = file => path.resolve(__dirname, file)
-//中间件挂载
-app.use(koaStatic(__dirname + "../dist"));
-app.use(bodyparser);
-app.use(json());
-app.use(logger());
+// 访问静态资源文件 这里是访问所有dist目录下的静态资源文件
+app.use(express.static(path.resolve(__dirname, '../dist')))
 
-// router.get('/', async(ctx, next) => {
-//   //   const html = fs.readFileSync(path.resolve(__dirname, '../dist/index.html'), 'utf-8')
-//   const html = `
-//     <ul>
-//       <li><a href="/page/helloworld">/page/helloworld</a></li>
-//       <li><a href="/page/404">/page/404</a></li>
-//     </ul>
-//   `
-//   ctx.body = html
-// })
-
-// response
-app.use(ctx => {
+// 因为是单页应用 所有请求都走/dist/index.html
+app.get('/index', (req, res) => {
   const html = fs.readFileSync(path.resolve(__dirname, '../dist/index.html'), 'utf-8')
-  //   const html = `
-  //     <ul>
-  //       <li><a href="/page/helloworld">/page/helloworld</a></li>
-  //       <li><a href="/page/404">/page/404</a></li>
-  //     </ul>
-  //   `
-  ctx.body = html;
-});
-app.use(router.routes()).use(router.allowedMethods())
-// app.use(async (ctx, next) => {
-//   const start = Date.now();
-//   await next();
-//   const ms = Date.now() - start;
-//   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
-// });
+  res.send(html)
+})
 
-app.listen(3000);
-
+// 监听3000端口
+app.listen(3000, () => {
+    console.log('success listen at 3000')
+})
 
