@@ -30,7 +30,7 @@ router.post('/api/signup', (req, res) => {
           }
           res.json({
             code: 200,
-            data: {},
+            data: data._id,
             msg: '注册成功'
           })
         })

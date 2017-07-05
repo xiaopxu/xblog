@@ -47,6 +47,9 @@ export default {
                 this.$Notice.open({
                     title: '注册成功'
                 });
+                return Promise.resolve(res)
+            }).then(res => {
+                console.log('注册ID：' + res)
             })
         }
     }
