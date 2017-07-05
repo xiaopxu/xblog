@@ -1,8 +1,19 @@
 <template>
     <div id="sign-up">
-        <Input v-model="userName" icon="person" placeholder="请输入用户名"></Input>
-        <Input v-model="pwdword" icon="key" placeholder="请输入密码"></Input>
-        <Button type="success" @click="signUp">注册</Button>
+        <Row :gutter="16">
+            <Col span="10">
+            <div class="logo">
+
+            </div>
+            </Col>
+            <Col span="14">
+            <div class="forms">
+                <Input v-model="userName" icon="person" placeholder="请输入用户名" style="margin:5px 0"></Input>
+                <Input v-model="pwdword" icon="key" placeholder="请输入密码" style="margin:5px 0"></Input>
+                <Button type="success" @click="signUp" long style="margin:5px 0">注册</Button>
+            </div>
+            </Col>
+        </Row>
     </div>
 </template>
 <script>
@@ -42,7 +53,20 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-
+#sign-up {
+    height: 100%;
+    overflow: hidden;
+    .logo {
+        background: #ccc;
+        padding: 10px;
+        height: 500px;
+    }
+    .forms {
+        background: #f4f4f4;
+        padding: 10px;
+        height: 500px;
+    }
+}
 </style>
 
 
