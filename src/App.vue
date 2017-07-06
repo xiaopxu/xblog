@@ -11,6 +11,16 @@ export default {
 </script>
 
 <style>
+html {
+    max-width: 960px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -21,5 +31,6 @@ export default {
     max-width: 960px;
     margin: 0 auto;
     height: 100%;
+    width: 100%;
 }
 </style>

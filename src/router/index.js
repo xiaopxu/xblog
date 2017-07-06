@@ -2,15 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Sign from './../views/sign'
-import SignIn from './../views/sign_in'
+import Index from './../views/index'
 
 Vue.use(Router)
 
 export default new Router({
     routes: [{
             path: '/',
-            name: 'sign-in',
-            component: SignIn
+            name: 'index',
+            component: Index
         },
         {
             path: '/sign',
