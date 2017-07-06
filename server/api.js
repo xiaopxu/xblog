@@ -50,11 +50,25 @@ router.post('/api/signin', (req, res) => {
             if (err) {
                 return
             }
+            if (data === null) {
+                res.json({
+                    code: 501,
+                    data: '',
+                    msg: '该用户不存在'
+                })
+                return
+            }
             if (data.password === password) {
                 res.json({
                     code: 200,
                     data: data._id,
                     msg: '登陆成功'
+                })
+            } else {
+                res.json({
+                    code: 502,
+                    data: '',
+                    msg: '用户名或密码错误'
                 })
             }
         })

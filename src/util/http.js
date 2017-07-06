@@ -12,7 +12,7 @@ export default {
                         if (res.data.code === 200) {
                             resolve(res.data.data)
                         } else {
-                            this.$Message.error(res.data.msg)
+                            this.$message.error(res.data.msg)
                             reject(res.data.msg)
                         }
                     })

@@ -98,7 +98,7 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 #sign {
     width: 400px;
     height: 100%;
@@ -110,10 +110,27 @@ export default {
     .forms {
         background: #f4f4f4;
         padding: 10px;
+        padding-top: 50px;
         height: 500px;
+        .el-input {
+            margin: 5px 0;
+        }
     }
-    .el-tabs .forms .el-input-group__prepend {
+    .el-tabs__header {
+        margin: 0;
+    }
+    .el-input-group__prepend {
         width: 20px;
+    }
+    .el-tabs__nav {
+        width: 100%;
+        .el-tabs__active-bar {
+            left: 140px;
+        }
+    }
+    button {
+        width: 100%;
+        margin: 5px 0;
     }
 }
 </style>
