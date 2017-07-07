@@ -12,7 +12,7 @@ export default {
 
 <style>
 html {
-    max-width: 960px;
+    /*max-width: 960px;*/
     margin: 0 auto;
     height: 100%;
 }
@@ -28,7 +28,7 @@ a {
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
-    max-width: 960px;
+    /*max-width: 960px;*/
     margin: 0 auto;
     height: 100%;
     width: 100%;

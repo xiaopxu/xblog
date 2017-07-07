@@ -8,12 +8,15 @@ import router from './router'
 import element from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import './../static/font-awesome-4.7.0/css/font-awesome.min.css'
+import $ from 'jquery'
 //引入自定义插件
 import http from './util/http.js'
+import validate from './util/validate.js'
 
 // Vue.use(iView);
 Vue.use(http);
 Vue.use(element);
+window.$ = $
 
 Vue.config.productionTip = false
 

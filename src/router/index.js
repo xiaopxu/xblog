@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Sign from './../views/sign'
 import Index from './../views/index'
+import Writer from './../views/writer'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
             path: '/sign',
             name: 'sign',
             component: Sign
+        },
+        {
+            path: '/writer',
+            name: 'writer',
+            component: Writer
         }
     ]
 })
