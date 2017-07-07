@@ -52,7 +52,7 @@ export default {
                 }
             }).then(res => {
                 this.$message({
-                    message: '恭喜，注册成功',
+                    message: '保存成功',
                     type: 'success'
                 });
             })

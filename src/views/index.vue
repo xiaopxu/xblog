@@ -16,8 +16,10 @@
                 </el-menu-item>
             </el-menu>
         </div>
-        <div class="lists">
-            <articleCard :articleList="articleList"></articleCard>
+        <div class="content">
+            <div class="lists">
+                <articleCard :articleList="articleList"></articleCard>
+            </div>
         </div>
     </div>
 </template>
@@ -56,6 +58,10 @@ export default {
         &>li {
             float: right
         }
+    }
+    .content {
+        max-width: 1080px;
+        margin: 0 auto;
     }
 }
 </style>

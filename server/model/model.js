@@ -25,6 +25,14 @@ const articleSchema = new Schema({
     editTime: {
         type: Date,
         Default: Date.now
+    },
+    viewCount: {
+        type: Number,
+        Default: 0
+    },
+    comment: {
+        type: Array,
+        Default: []
     }
 })
 

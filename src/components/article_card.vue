@@ -1,7 +1,11 @@
 <template>
     <div id="article-card">
         <el-card class="box-card" v-for="article in articleList" :key="article">
-            <div class="clearfix">
+            <div class="info">
+                <span class="author"></span>
+                <span class="time">{{article.createTime | moment}}</span>
+            </div>
+            <div class="article-title clearfix">
                 <span style="line-height: 36px;">{{article.title}}</span>
             </div>
         </el-card>
@@ -34,8 +38,17 @@ export default {
     }
 }
 </script>
-<style lang="less>
-
+<style lang="less">
+#article-card {
+    text-align: left;
+    padding: 5px 10px;
+    .info {
+        .time {
+            font-size: 12px;
+        }
+    }
+    .article-title {}
+}
 </style>
 
 
