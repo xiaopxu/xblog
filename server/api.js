@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const db = require('./db')
-const model = require('./model')
+const model = require('./model/model')
 const mongoose = require('mongoose')
 const md5 = require('md5')
 
@@ -72,6 +72,50 @@ router.post('/api/signin', (req, res) => {
                 })
             }
         })
+})
+
+//保存文章
+router.post('/api/saveArticle', (req, res) => {
+    let content = req.body.content
+    let userId = req.body.userId
+    let title = req.body.title
+
+    let article = new model.Article({
+        userId: userId,
+        title: title,
+        content: content,
+        createTime: new Date()
+    })
+
+    article.save((err, data) => {
+        if (err) {
+            return
+        }
+        res.json({
+            code: 200,
+            data: '',
+            msg: '保存成功'
+        })
+    })
+})
+
+//获取所有文章
+router.post('/api/getAllArticle', (req, res) => {
+    model.Article.find()
+        .exec((err, data) => {
+            if (err) {
+                return
+            }
+            if (data === null) {
+                data = []
+            }
+            res.json({
+                code: 200,
+                data: data,
+                msg: '获取所有文章成功'
+            })
+        })
+
 })
 
 module.exports = router

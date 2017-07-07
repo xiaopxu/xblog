@@ -12,9 +12,12 @@ import $ from 'jquery'
 //引入自定义插件
 import http from './util/http.js'
 import validate from './util/validate.js'
+import common from './util/common.js'
 
 // Vue.use(iView);
 Vue.use(http);
+Vue.use(validate);
+Vue.use(common);
 Vue.use(element);
 window.$ = $
 

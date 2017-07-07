@@ -7,7 +7,7 @@
                     <i class="fa fa-floppy-o fa-lg" aria-hidden="true" @click="saveArticle"></i>
                     <i class="fa fa-lg" v-bind:class="{'fa-expand': showPreview, 'fa-compress': !showPreview}" aria-hidden="true" @click="togglePreview"></i>
                     <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
-                    <i class="fa fa-home fa-lg" aria-hidden="true" @click="goHome"></i>
+                    <i class="fa fa-home fa-lg" aria-hidden="true" @click="goPage('/')"></i>
                 </div>
                 <textarea v-model="rawHtml" @input="renderHtml" class="form-control"></textarea>
             </div>
@@ -42,11 +42,20 @@ export default {
         togglePreview() {
             this.showPreview = !this.showPreview
         },
-        goHome() {
-            this.$router.push('/')
-        },
         saveArticle() {
-
+            this.post({
+                url: 'api/saveArticle',
+                data: {
+                    userId: '595dd1c11a2a1915ec602b84',
+                    title: this.title,
+                    content: this.rawHtml,
+                }
+            }).then(res => {
+                this.$message({
+                    message: '恭喜，注册成功',
+                    type: 'success'
+                });
+            })
         }
     },
     mounted() {

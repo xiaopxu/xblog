@@ -69,6 +69,7 @@ export default {
                     type: 'success'
                 });
                 console.log('注册ID：' + res)
+                this.goPage('/')
             })
         },
         signIn() {
@@ -92,7 +93,7 @@ export default {
                     type: 'success'
                 });
                 console.log('登陆ID：' + res)
-                this.$router.push({ path: '/' })
+                this.goPage('/')
             })
         }
     }
