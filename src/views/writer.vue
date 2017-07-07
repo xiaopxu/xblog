@@ -4,7 +4,7 @@
             <div class="input" v-bind:class="{'full-screen': !showPreview}">
                 <el-input v-model="title" placeholder="标题" class="title-input"></el-input>
                 <div class="toolbar">
-                    <i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i>
+                    <i class="fa fa-floppy-o fa-lg" aria-hidden="true" @click="saveArticle"></i>
                     <i class="fa fa-lg" v-bind:class="{'fa-expand': showPreview, 'fa-compress': !showPreview}" aria-hidden="true" @click="togglePreview"></i>
                     <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
                     <i class="fa fa-home fa-lg" aria-hidden="true" @click="goHome"></i>
@@ -44,6 +44,9 @@ export default {
         },
         goHome() {
             this.$router.push('/')
+        },
+        saveArticle() {
+
         }
     },
     mounted() {
@@ -52,8 +55,8 @@ export default {
                 return require('highlight.js').highlightAuto(code).value;
             }
         });
-        $('.input textarea').css('height', $(window).height())
-        $('.preview').css('height', $(window).height())
+        $('.input textarea').css('height', $(window).height() - 157)
+        $('.preview').css('height', $(window).height() - 60)
     }
 }
 </script>
@@ -67,6 +70,7 @@ html,
     .input.full-screen {
         margin: 0 auto;
         float: none;
+        box-shadow: 0 0 5px #ccc;
     }
     .input {
         float: left;
