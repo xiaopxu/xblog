@@ -161,6 +161,11 @@ html,
             border-radius: 0;
             background: #f6f6f6;
         }
+        blockquote {
+            border-left: solid 8px #f1f1f1;
+            margin-left: 0;
+            padding-left: 10px;
+        }
     }
 }
 </style>
