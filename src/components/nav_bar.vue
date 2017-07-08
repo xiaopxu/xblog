@@ -17,7 +17,10 @@
                     <router-link to="/">用户</router-link>
                 </el-menu-item>
                 <el-menu-item index="sign">
-                    <router-link to="/sign">注册</router-link>
+                    <router-link to="/sign/sign-in">登陆</router-link>
+                </el-menu-item>
+                <el-menu-item index="sign">
+                    <router-link to="/sign/sign-up">注册</router-link>
                 </el-menu-item>
                 <el-menu-item index="writer">
                     <router-link to="/writer">写作</router-link>

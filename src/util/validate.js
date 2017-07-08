@@ -12,6 +12,7 @@ export default {
          * 字段验证
          * @param {any} field 验证字段
          * @param {string} title 字段名称
+         * @return {boolean}
          */
         Vue.prototype.userNameTest = function (field, title) {
             if (!field || !title) {

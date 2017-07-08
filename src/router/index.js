@@ -19,14 +19,14 @@ export default new Router({
                     component: ArticleList
                 },
                 {
-                    path: '/article-view:id',
+                    path: '/article-view/:id',
                     name: 'article-view',
                     component: ArticleView
                 }
             ]
         },
         {
-            path: '/sign',
+            path: '/sign/:signType',
             name: 'sign',
             component: Sign
         },

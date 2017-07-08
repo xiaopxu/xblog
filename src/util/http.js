@@ -1,6 +1,12 @@
 import axios from 'axios'
 export default {
     install(Vue, options) {
+        /**
+         * post请求
+         * 
+         * @param {object} param 请求参数 {url:'api/xxx',data:{xx:xx}}
+         * @return {promise}
+         */
         Vue.prototype.post = function (param) {
 
             //获取参数

@@ -45,7 +45,7 @@ export default {
         }
     },
     mounted() {
-
+        this.signType = this.$route.params.signType
     },
     methods: {
         signUp() {
