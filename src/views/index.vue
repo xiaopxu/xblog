@@ -1,64 +1,34 @@
 <template>
     <div id="index">
-        <div class="nav-bar">
-            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                <el-menu-item index="writer">
-                    <router-link to="/writer">写作</router-link>
-                </el-menu-item>
-                <el-menu-item index="sign">
-                    <router-link to="/sign">注册</router-link>
-                </el-menu-item>
-                <el-menu-item index="user">
-                    <router-link to="/">用户</router-link>
-                </el-menu-item>
-                <el-menu-item index="index">
-                    <router-link to="/">首页</router-link>
-                </el-menu-item>
-            </el-menu>
-        </div>
+        <navbar></navbar>
         <div class="content">
-            <div class="lists">
-                <articleCard :articleList="articleList"></articleCard>
-            </div>
+            <router-view></router-view>
         </div>
     </div>
 </template>
 <script>
 import articleCard from './../components/article_card'
+import navbar from './../components/nav_bar'
 export default {
     data() {
         return {
-            activeIndex: 'index',
-            articleList: []
+
         }
     },
     components: {
-        articleCard
+        articleCard,
+        navbar
     },
     mounted() {
-        this.getArticle()
+
     },
     methods: {
-        handleSelect() {
 
-        },
-        getArticle() {
-            this.post({
-                url: 'api/getAllArticle'
-            }).then(res => {
-                this.articleList = res
-            })
-        }
     }
 }
 </script>
 <style lang='less'>
 #index {
-    .el-menu {
-        &>li {
-            float: right
-        }
-    }
     .content {
         max-width: 1080px;
         margin: 0 auto;

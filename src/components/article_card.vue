@@ -6,7 +6,7 @@
                 <span class="time">{{article.createTime | moment}}</span>
             </div>
             <div class="article-title clearfix">
-                <span style="line-height: 36px;">{{article.title}}</span>
+                <span style="line-height: 36px;" @click="goPage('/article-view',article._id)">{{article.title}}</span>
             </div>
         </el-card>
     </div>
@@ -47,7 +47,9 @@ export default {
             font-size: 12px;
         }
     }
-    .article-title {}
+    .article-title {
+        cursor: pointer
+    }
 }
 </style>
 

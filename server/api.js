@@ -118,4 +118,29 @@ router.post('/api/getAllArticle', (req, res) => {
 
 })
 
+//获取指定文章
+router.post('/api/getArticleById', (req, res) => {
+    let _id = mongoose.Types.ObjectId(req.body._id)
+    model.Article.findOne()
+        .where('_id').equals(_id)
+        .exec((err, data) => {
+            if (err) {
+                return
+            }
+            if (data === null) {
+                res.json({
+                    code: 400,
+                    data: '',
+                    msg: '获取失败'
+                })
+                return
+            }
+            res.json({
+                code: 200,
+                data: data,
+                msg: '文章获取成功'
+            })
+        })
+})
+
 module.exports = router

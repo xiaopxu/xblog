@@ -24,7 +24,7 @@ export default {
                             resolve(res.data.data)
                         } else {
                             this.$message.error(res.data.msg)
-                            reject(res.data.msg)
+                            reject(res.data)
                         }
                         console.warn('=============================== 请求完成 =======================================')
                     })
