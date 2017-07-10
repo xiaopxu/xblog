@@ -27,7 +27,7 @@ app.get('/index', (req, res) => {
 })
 
 // 监听3000端口
-app.listen(3000, () => {
-    console.log('success listen at 3000')
+app.listen(3030, () => {
+  console.log('success listen at 3030')
 })
 
