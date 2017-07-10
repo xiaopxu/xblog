@@ -15,6 +15,7 @@ import validate from './util/validate.js'
 import common from './util/common.js'
 import filter from './util/filter.js'
 import cookie from './util/cookie.js'
+import globalData from './util/global_data.js'
 
 Vue.use(element);
 window.$ = $
@@ -24,18 +25,18 @@ Vue.use(http);
 Vue.use(validate);
 Vue.use(common);
 Vue.use(filter);
-Vue.use(cookie)
-
+Vue.use(cookie);
+Vue.use(globalData);
 
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    router,
-    template: '<App/>',
-    components: {
-        App
-    }
+  el: '#app',
+  router,
+  template: '<App/>',
+  components: {
+    App
+  }
 })

@@ -92,8 +92,9 @@ export default {
                     message: '登陆成功',
                     type: 'success',
                 });
-                console.log('登陆ID：' + res)
-                this.setCookie('userId', res)
+                console.log('登陆ID：' + res.userId)
+                this.setCookie('rememberKey', res.rememberKey)
+                this.setGlobalData('isSignin', true)
                 this.goPage('/')
             })
         }

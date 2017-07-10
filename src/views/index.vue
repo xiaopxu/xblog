@@ -1,6 +1,6 @@
 <template>
     <div id="index">
-        <navbar></navbar>
+        <navbar :isSignin="isSignin"></navbar>
         <div class="content">
             <router-view></router-view>
         </div>
@@ -12,15 +12,31 @@ import navbar from './../components/nav_bar'
 export default {
     data() {
         return {
-
+            isSignin: false
         }
     },
     components: {
         articleCard,
         navbar
     },
+    created() {
+        this.isSignin = this.getGlobalData('isSignin')
+        if (this.isSignin) { return }
+        this.post({
+            url: 'api/autoSignin',
+            data: {
+                rememberKey: this.getCookie('rememberKey')
+            }
+        }).then(res => {
+            console.log('===========免登成功============')
+            this.setGlobalData('isSignin', true)
+            this.isSignin = true
+        }).catch(err => {
+            this.goPage('/sign', 'sign-in')
+        })
+    },
     mounted() {
-        console.log(this.getCookie('userId'))
+
     },
     methods: {
 
