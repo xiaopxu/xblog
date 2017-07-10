@@ -20,7 +20,7 @@ export default {
         navbar
     },
     mounted() {
-
+        console.log(this.getCookie('userId'))
     },
     methods: {
 

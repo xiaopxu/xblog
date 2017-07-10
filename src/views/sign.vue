@@ -90,9 +90,10 @@ export default {
             }).then(res => {
                 this.$message({
                     message: '登陆成功',
-                    type: 'success'
+                    type: 'success',
                 });
                 console.log('登陆ID：' + res)
+                this.setCookie('userId', res)
                 this.goPage('/')
             })
         }

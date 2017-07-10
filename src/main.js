@@ -14,6 +14,7 @@ import http from './util/http.js'
 import validate from './util/validate.js'
 import common from './util/common.js'
 import filter from './util/filter.js'
+import cookie from './util/cookie.js'
 
 Vue.use(element);
 window.$ = $
@@ -23,6 +24,7 @@ Vue.use(http);
 Vue.use(validate);
 Vue.use(common);
 Vue.use(filter);
+Vue.use(cookie)
 
 
 
