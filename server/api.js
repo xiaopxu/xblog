@@ -5,6 +5,8 @@ const model = require('./model/model')
 const mongoose = require('mongoose')
 const md5 = require('md5')
 const getLocalIp = require('./utils/get_ip')
+const articleDao = require('./dao/article_dao')
+const userDao = require('./dao/user_dao')
 
 //注册用户
 router.post('/api/signup', (req, res) => {
@@ -170,26 +172,69 @@ router.post('/api/getAllArticle', (req, res) => {
 //获取指定文章
 router.post('/api/getArticleById', (req, res) => {
   let _id = mongoose.Types.ObjectId(req.body._id)
-  model.Article.findOne()
-    .where('_id').equals(_id)
-    .exec((err, data) => {
-      if (err) {
-        return
-      }
-      if (data === null) {
+  articleDao.getArticleById(_id)
+    .then(article => {
+      if (article === null) {
         res.json({
           code: 400,
           data: '',
-          msg: '获取失败'
+          msg: '文章获取失败'
         })
         return
       }
+      return Promise.resolve(article)
+    })
+    .then(article => {
+      userDao.getUserById(article.userId)
+        .then(user => {
+          if (user === null) {
+            res.json({
+              code: 400,
+              data: '',
+              msg: '用户获取失败'
+            })
+          }
+          let data = {
+            user: user,
+            article: article
+          }
+          return Promise.resolve(data)
+        })
+    })
+    .then(data => {
       res.json({
         code: 200,
         data: data,
-        msg: '文章获取成功'
+        msg: '获取成功'
       })
     })
+    .catch(err => {
+      res.json({
+        code: 400,
+        data: '',
+        msg: '服务器错误'
+      })
+    })
+//   model.Article.findOne()
+//     .where('_id').equals(_id)
+//     .exec((err, data) => {
+//       if (err) {
+//         return
+//       }
+//       if (data === null) {
+//         res.json({
+//           code: 400,
+//           data: '',
+//           msg: '获取失败'
+//         })
+//         return
+//       }
+//       res.json({
+//         code: 200,
+//         data: data,
+//         msg: '文章获取成功'
+//       })
+//     })
 })
 
 module.exports = router

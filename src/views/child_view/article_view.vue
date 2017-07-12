@@ -1,17 +1,27 @@
 <template>
     <div id="view">
-        <h3 class="title">{{title}}</h3>
-        <div class="content" v-html="view"></div>
+        <div class="author">
+            <tag value='作者'></tag>
+            <span></span>
+        </div>
+        <div class="article">
+            <h3 class="title">{{title}}</h3>
+            <div class="content" v-html="view"></div>
+        </div>
     </div>
 </template>
 <script>
 import marked from 'marked'
+import tag from './../../items/tag'
 export default {
     data() {
         return {
             title: '',
             view: ''
         }
+    },
+    components: {
+        tag
     },
     mounted() {
         this.post({
