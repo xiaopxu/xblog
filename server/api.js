@@ -9,37 +9,25 @@ const articleDao = require('./dao/article_dao')
 const userDao = require('./dao/user_dao')
 
 //注册用户
-router.post('/api/signup', (req, res) => {
+router.post('/api/signup', async (req, res) => {
   let userName = req.body.userName
   let password = req.body.pwdword
 
-  model.User.findOne()
-    .where('userName').equals(userName)
-    .exec((err, data) => {
-      if (data !== null) {
-        res.json({
-          code: 500,
-          data: {},
-          msg: '该用户名已存在'
-        })
-      } else {
-        let user = new model.User({
-          userName: userName,
-          password: password,
-          regTime: new Date()
-        })
-        user.save((err, data) => {
-          if (err) {
-            return
-          }
-          res.json({
-            code: 200,
-            data: data._id,
-            msg: '恭喜，注册成功'
-          })
-        })
-      }
+  let user = await userDao.getUserByUserName(userName)
+  if (user !== null) {
+    res.json({
+      code: 500,
+      data: {},
+      msg: '该用户名已存在'
     })
+  } else {
+    let newUser = userDao.addUser(userName, password)
+    res.json({
+      code: 200,
+      data: newUser._id,
+      msg: '恭喜，注册成功'
+    })
+  }
 })
 
 //用户登录
