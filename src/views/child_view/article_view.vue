@@ -23,16 +23,15 @@ export default {
     components: {
         tag
     },
-    mounted() {
-        this.post({
+    async mounted() {
+        let viewData = await this.post({
             url: 'api/getArticleById',
             data: {
                 _id: this.$route.params.id
             }
-        }).then(res => {
-            this.title = res.article.title
-            this.view = marked(res.article.content)
         })
+        this.title = viewData.article.title
+        this.view = marked(viewData.article.content)
     }
 }
 </script>

@@ -21,7 +21,7 @@ router.post('/api/signup', async (req, res) => {
       msg: '该用户名已存在'
     })
   } else {
-    let newUser = userDao.addUser(userName, password)
+    let newUser = await userDao.addUser(userName, password)
     res.json({
       code: 200,
       data: newUser._id,
@@ -196,7 +196,7 @@ router.post('/api/getArticleById', async (req, res) => {
     })
   } catch (err) {
     res.json({
-      code: 400,
+      code: 500,
       data: '',
       msg: '服务器错误'
     })
