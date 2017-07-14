@@ -170,71 +170,49 @@ router.post('/api/getAllArticle', (req, res) => {
 })
 
 //获取指定文章
-router.post('/api/getArticleById', (req, res) => {
+router.post('/api/getArticleById', async (req, res) => {
   let _id = mongoose.Types.ObjectId(req.body._id)
-  articleDao.getArticleById(_id)
-    .then(article => {
-      if (article === null) {
-        res.json({
-          code: 400,
-          data: '',
-          msg: '文章获取失败'
-        })
-        return
-      }
-      return Promise.resolve(article)
-    })
-    .then(article => {
-      userDao.getUserById(article.userId)
-        .then(user => {
-          if (user === null) {
-            res.json({
-              code: 400,
-              data: '',
-              msg: '用户获取失败'
-            })
-          }
-          let data = {
-            user: user,
-            article: article
-          }
-          return Promise.resolve(data)
-        })
-    })
-    .then(data => {
-      res.json({
-        code: 200,
-        data: data,
-        msg: '获取成功'
-      })
-    })
-    .catch(err => {
+  try {
+    //获取文章数据
+    let article = await articleDao.getArticleById(_id)
+
+    if (article === null) {
       res.json({
         code: 400,
         data: '',
-        msg: '服务器错误'
+        msg: '文章获取失败'
       })
+      return
+    }
+
+    //获取用户数据
+    let user = await userDao.getUserById(article.userId)
+
+    if (user === null) {
+      res.json({
+        code: 400,
+        data: '',
+        msg: '用户获取失败'
+      })
+      return
+    }
+
+    //返回客户端数据
+    res.json({
+      code: 200,
+      data: {
+        user: user,
+        article: article
+      },
+      msg: '获取成功'
     })
-//   model.Article.findOne()
-//     .where('_id').equals(_id)
-//     .exec((err, data) => {
-//       if (err) {
-//         return
-//       }
-//       if (data === null) {
-//         res.json({
-//           code: 400,
-//           data: '',
-//           msg: '获取失败'
-//         })
-//         return
-//       }
-//       res.json({
-//         code: 200,
-//         data: data,
-//         msg: '文章获取成功'
-//       })
-//     })
+  } catch (err) {
+    res.json({
+      code: 400,
+      data: '',
+      msg: '服务器错误'
+    })
+  }
 })
 
 module.exports = router

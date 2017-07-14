@@ -30,8 +30,8 @@ export default {
                 _id: this.$route.params.id
             }
         }).then(res => {
-            this.title = res.title
-            this.view = marked(res.content)
+            this.title = res.article.title
+            this.view = marked(res.article.content)
         })
     }
 }
