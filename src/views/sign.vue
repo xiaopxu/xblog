@@ -68,7 +68,7 @@ export default {
                     message: '恭喜，注册成功',
                     type: 'success'
                 });
-                console.log('注册ID：' + res)
+                console.log('注册成功，注册ID：' + res)
                 this.goPage('/')
             })
         },
@@ -92,7 +92,12 @@ export default {
                     message: '登陆成功',
                     type: 'success',
                 });
-                console.log('登陆ID：' + res.userId)
+                console.log('登陆成功，登陆ID：' + res.userId)
+                //删除已经存在的key
+                if (this.getCookie('rememberKey')) {
+                    this.delCookie('rememberKey')
+                }
+                //保存新的key
                 this.setCookie('rememberKey', res.rememberKey)
                 this.setGlobalData('isSignin', true)
                 this.goPage('/')

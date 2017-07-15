@@ -46,7 +46,7 @@ export default {
             this.post({
                 url: 'api/saveArticle',
                 data: {
-                    userId: '595dd1c11a2a1915ec602b84',
+                    userId: '596049370b747e3a147eee64',
                     title: this.title,
                     content: this.rawHtml,
                 }

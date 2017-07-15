@@ -1,38 +1,47 @@
 export default {
-    install(Vue, options) {
-        /**
-         * 设置cookie
-         *
-         * @param {string} name key
-         * @param {string} value value
-         */
-        Vue.prototype.setCookie = function (name, value) {
-            var Days = 10; //此 cookie 将被保存 30 天
-            var exp = new Date(); //new Date("December 31, 9998");
-            exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-            if ((typeof value == "string") && (value.length > 0)) {
-                document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-            } else {
-                var exp = new Date();
-                exp.setTime(exp.getTime() - 1);
-                var cval = getCookie(name);
-                if (cval != null)
-                    document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
-            }
-        }
-
-        /**
-         * 获取cookie
-         *
-         * @param {string} name key
-         */
-        Vue.prototype.getCookie = function (name) {
-            // (^| )name=([^;]*)(;|$),match[0]为与整个正则表达式匹配的字符串，match[i]为正则表达式捕获数组相匹配的数组；
-            var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
-            if (arr != null) {
-                return unescape(arr[2]);
-            }
-            return null;
-        }
+  install(Vue, options) {
+    /**
+     * 设置cookie
+     *
+     * @param {string} key key
+     * @param {string} val value
+     */
+    Vue.prototype.setCookie = function(key, val) { //设置cookie方法
+      var date = new Date(); //获取当前时间
+      var expiresDays = 10; //将date设置为n天以后的时间
+      date.setTime(date.getTime() + expiresDays * 24 * 3600 * 1000); //格式化为cookie识别的时间
+      document.cookie = key + "=" + val + ";expires=" + date.toGMTString(); //设置cookie
     }
+
+    /**
+     * 获取cookie
+     *
+     * @param {string} key key
+     */
+    Vue.prototype.getCookie = function(key) { //获取cookie方法
+      /*获取cookie参数*/
+      var getCookie = document.cookie.replace(/[ ]/g, ""); //获取cookie，并且将获得的cookie格式化，去掉空格字符
+      var arrCookie = getCookie.split(";") //将获得的cookie以"分号"为标识 将cookie保存到arrCookie的数组中
+      var tips; //声明变量tips
+      for (var i = 0; i < arrCookie.length; i++) { //使用for循环查找cookie中的tips变量
+        var arr = arrCookie[i].split("="); //将单条cookie用"等号"为标识，将单条cookie保存为arr数组
+        if (key == arr[0]) { //匹配变量名称，其中arr[0]是指的cookie名称，如果该条变量为tips则执行判断语句中的赋值操作
+          tips = arr[1]; //将cookie的值赋给变量tips
+          break; //终止for循环遍历
+        }
+      }
+
+      /**
+       * 删除cookie
+       *
+       * @param {string} key key
+       */
+      Vue.prototype.delCookie = function(key) { //删除cookie方法
+        var date = new Date(); //获取当前时间
+        date.setTime(date.getTime() - 10000); //将date设置为过去的时间
+        document.cookie = key + "=v; expires =" + date.toGMTString(); //设置cookie
+      }
+      return tips;
+    }
+  }
 }

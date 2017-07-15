@@ -12,6 +12,7 @@
                     <el-input placeholder="搜索" icon="search" v-model="searchKey" :on-icon-click="doSearch"></el-input>
                 </div>
             </div>
+    
             <div class="nav-right">
                 <el-menu-item index="user">
                     <router-link to="/">用户</router-link>
