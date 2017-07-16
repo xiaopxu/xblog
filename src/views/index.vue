@@ -30,6 +30,7 @@ export default {
         }).then(res => {
             console.log('===========免登成功============')
             this.setGlobalData('isSignin', true)
+            this.setGlobalData('userId', res)
             this.isSignin = true
         }).catch(err => {
             this.goPage('/sign', 'sign-in')

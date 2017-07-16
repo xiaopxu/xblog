@@ -1,6 +1,6 @@
 <template>
     <div id="nav-bar">
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <div class="nav-left">
                 <div class="logo" @click="goPage('/')">XBlog</div>
                 <div class="home">
@@ -14,13 +14,18 @@
             </div>
     
             <div class="nav-right">
-                <el-menu-item index="user">
-                    <router-link to="/">用户</router-link>
-                </el-menu-item>
-                <el-menu-item index="sign" v-show="!isSignin">
+                <!-- <el-menu-item index="user">
+                                                                                                                            <router-link to="/">用户</router-link>
+                                                                                                                        </el-menu-item> -->
+                <el-submenu index="user">
+                    <template slot="title">用户</template>
+                    <el-menu-item index="setting">设置</el-menu-item>
+                    <el-menu-item index="signout" v-show="isSignined">注销</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="sign" v-show="!isSignined">
                     <router-link to="/sign/sign-in">登陆</router-link>
                 </el-menu-item>
-                <el-menu-item index="sign" v-show="!isSignin">
+                <el-menu-item index="sign" v-show="!isSignined">
                     <router-link to="/sign/sign-up">注册</router-link>
                 </el-menu-item>
                 <el-menu-item index="writer">
@@ -35,13 +40,29 @@ export default {
     data() {
         return {
             activeIndex: 'index',
-            searchKey: ''
+            searchKey: '',
+            isSignined: this.isSignin
         }
     },
     props: ['isSignin'],
     methods: {
         doSearch() {
 
+        },
+        async handleSelect(key, keyPath) {
+            if (key === 'signout') {
+                await this.post({
+                    url: 'api/signout',
+                    data: {
+                        userId: this.getGlobalData('userId')
+                    }
+                })
+                this.delCookie('rememberKey')
+                this.setGlobalData('isSignin', false)
+                this.isSignined = false
+            } else if (key === 'setting') {
+                this.goPage('setting')
+            }
         }
     }
 }

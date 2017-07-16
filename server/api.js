@@ -13,21 +13,30 @@ router.post('/api/signup', async (req, res) => {
   let userName = req.body.userName
   let password = req.body.pwdword
 
-  let user = await dao.userDao.getUserByUserName(userName)
-  if (user !== null) {
+  try {
+    let user = await dao.userDao.getUserByUserName(userName)
+    if (user !== null) {
+      res.json({
+        code: 500,
+        data: {},
+        msg: '该用户名已存在'
+      })
+    } else {
+      let newUser = await dao.userDao.addUser(userName, password)
+      res.json({
+        code: 200,
+        data: newUser._id,
+        msg: '恭喜，注册成功'
+      })
+    }
+  } catch (err) {
     res.json({
-      code: 500,
-      data: {},
-      msg: '该用户名已存在'
-    })
-  } else {
-    let newUser = await dao.userDao.addUser(userName, password)
-    res.json({
-      code: 200,
-      data: newUser._id,
-      msg: '恭喜，注册成功'
+      code: 400,
+      data: '',
+      msg: '服务器错误'
     })
   }
+
 })
 
 //用户登录
@@ -100,7 +109,7 @@ router.post('/api/autoSignin', async (req, res) => {
       if (remember.ipAddress === getLocalIp()) {
         res.json({
           code: 200,
-          data: '',
+          data: remember.userId,
           msg: '登陆成功'
         })
       } else {
@@ -119,6 +128,17 @@ router.post('/api/autoSignin', async (req, res) => {
     })
   }
 
+})
+
+//用户注销
+router.post('/api/signout', async (req, res) => {
+  let userId = req.body.userId
+  await dao.loginRememberDao.delRememberByUserId(userId)
+  res.json({
+    code: 200,
+    data: '',
+    msg: '注销成功'
+  })
 })
 
 //保存文章

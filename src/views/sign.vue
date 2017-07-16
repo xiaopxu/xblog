@@ -48,7 +48,7 @@ export default {
         this.signType = this.$route.params.signType
     },
     methods: {
-        signUp() {
+        async signUp() {
             if (this.userName === '') {
                 this.$message.error('用户名不能为空')
                 return
@@ -57,22 +57,21 @@ export default {
                 this.$message.error('密码不能为空')
                 return
             }
-            this.post({
+            let user = await this.post({
                 url: 'api/signup',
                 data: {
                     userName: this.userName,
                     pwdword: md5(this.pwdword)
                 }
-            }).then(res => {
-                this.$message({
-                    message: '恭喜，注册成功',
-                    type: 'success'
-                });
-                console.log('注册成功，注册ID：' + res)
-                this.goPage('/')
             })
+            this.$message({
+                message: '恭喜，注册成功',
+                type: 'success'
+            });
+            console.log('注册成功，注册ID：' + user)
+            this.signIn()
         },
-        signIn() {
+        async signIn() {
             if (this.userName === '') {
                 this.$message.error('用户名不能为空')
                 return
@@ -81,27 +80,27 @@ export default {
                 this.$message.error('密码不能为空')
                 return
             }
-            this.post({
+            let user = await this.post({
                 url: 'api/signin',
                 data: {
                     userName: this.userName,
                     pwdword: md5(this.pwdword)
                 }
-            }).then(res => {
-                this.$message({
-                    message: '登陆成功',
-                    type: 'success',
-                });
-                console.log('登陆成功，登陆ID：' + res.userId)
-                //删除已经存在的key
-                if (this.getCookie('rememberKey')) {
-                    this.delCookie('rememberKey')
-                }
-                //保存新的key
-                this.setCookie('rememberKey', res.rememberKey)
-                this.setGlobalData('isSignin', true)
-                this.goPage('/')
             })
+            this.$message({
+                message: '登陆成功',
+                type: 'success',
+            });
+            console.log('登陆成功，登陆ID：' + user.userId)
+            //删除已经存在的key
+            if (this.getCookie('rememberKey')) {
+                this.delCookie('rememberKey')
+            }
+            //保存新的key
+            this.setCookie('rememberKey', user.rememberKey)
+            this.setGlobalData('isSignin', true)
+            this.setGlobalData('userId', user.userId)
+            this.goPage('/')
         }
     }
 }

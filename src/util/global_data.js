@@ -1,5 +1,6 @@
 let data = {
-  isSignin: false
+  isSignin: false,
+  userId: ''
 }
 
 export default {
