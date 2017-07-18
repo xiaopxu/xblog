@@ -25,6 +25,7 @@ import 'highlight.js/styles/googlecode.css'
 export default {
     data() {
         return {
+            articleId: '',
             rawHtml: '',
             previewHtml: '',
             title: '',
@@ -58,7 +59,14 @@ export default {
             })
         }
     },
-    mounted() {
+    created() {
+        this.articleId = this.$route.params.id
+    },
+    async mounted() {
+        if (this.articleId) {
+            let article = await this.post('api/getArticleById')
+            this.rawHtml = article.content
+        }
         marked.setOptions({
             highlight: function (code) {
                 return require('highlight.js').highlightAuto(code).value;

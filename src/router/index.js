@@ -9,31 +9,32 @@ import ArticleView from './../views/child_view/article_view'
 Vue.use(Router)
 
 export default new Router({
-    routes: [{
-            path: '/',
-            name: 'index',
-            component: Index,
-            children: [{
-                    path: '/',
-                    name: 'article-list',
-                    component: ArticleList
-                },
-                {
-                    path: '/article-view/:id',
-                    name: 'article-view',
-                    component: ArticleView
-                }
-            ]
-        },
+  routes: [
+    {
+      path: '/',
+      name: 'index',
+      component: Index,
+      children: [{
+        path: '/',
+        name: 'article-list',
+        component: ArticleList
+      },
         {
-            path: '/sign/:signType',
-            name: 'sign',
-            component: Sign
-        },
-        {
-            path: '/writer',
-            name: 'writer',
-            component: Writer
+          path: '/article-view/:id',
+          name: 'article-view',
+          component: ArticleView
         }
-    ]
+      ]
+    },
+    {
+      path: '/sign/:signType',
+      name: 'sign',
+      component: Sign
+    },
+    {
+      path: '/writer/:id',
+      name: 'writer',
+      component: Writer
+    }
+  ]
 })
