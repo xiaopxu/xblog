@@ -12,20 +12,17 @@
                     <el-input placeholder="搜索" icon="search" v-model="searchKey" :on-icon-click="doSearch"></el-input>
                 </div>
             </div>
-    
+
             <div class="nav-right">
-                <!-- <el-menu-item index="user">
-                                                                                                                            <router-link to="/">用户</router-link>
-                                                                                                                        </el-menu-item> -->
                 <el-submenu index="user">
                     <template slot="title">用户</template>
                     <el-menu-item index="setting">设置</el-menu-item>
-                    <el-menu-item index="signout" v-show="isSignined">注销</el-menu-item>
+                    <el-menu-item index="signout" v-show="isSignin">注销</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="sign" v-show="!isSignined">
+                <el-menu-item index="sign" v-show="!isSignin">
                     <router-link to="/sign/sign-in">登陆</router-link>
                 </el-menu-item>
-                <el-menu-item index="sign" v-show="!isSignined">
+                <el-menu-item index="sign" v-show="!isSignin">
                     <router-link to="/sign/sign-up">注册</router-link>
                 </el-menu-item>
                 <el-menu-item index="writer">
@@ -40,8 +37,7 @@ export default {
     data() {
         return {
             activeIndex: 'index',
-            searchKey: '',
-            isSignined: this.isSignin
+            searchKey: ''
         }
     },
     props: ['isSignin'],
@@ -59,7 +55,7 @@ export default {
                 })
                 this.delCookie('rememberKey')
                 this.setGlobalData('isSignin', false)
-                this.isSignined = false
+                this.$emit('signout', false)
             } else if (key === 'setting') {
                 this.goPage('setting')
             }

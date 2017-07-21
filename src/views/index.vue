@@ -1,6 +1,6 @@
 <template>
     <div id="index">
-        <navbar :isSignin="isSignin"></navbar>
+        <navbar :isSignin="isSignin" @signout="signout"></navbar>
         <div class="content">
             <router-view></router-view>
         </div>
@@ -20,8 +20,8 @@ export default {
         navbar
     },
     created() {
-        this.isSignin = this.getGlobalData('isSignin')
-        if (this.isSignin) { return }
+        // this.isSignin = this.getGlobalData('isSignin')
+        // if (this.isSignin) { return }
         this.post({
             url: 'api/autoSignin',
             data: {
@@ -40,7 +40,9 @@ export default {
 
     },
     methods: {
-
+        signout(){
+            this.isSignin = false
+        }
     }
 }
 </script>

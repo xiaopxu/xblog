@@ -3,7 +3,7 @@ export default {
     install(Vue, options) {
         /**
          * post请求
-         * 
+         *
          * @param {object} param 请求参数 {url:'api/xxx',data:{xx:xx}}
          * @return {promise}
          */
@@ -17,13 +17,14 @@ export default {
             console.warn('=============================== 发起请求 =======================================')
             console.log('请求接口：', 'http://localhost:3000/' + url)
             console.log('请求参数：', data)
+            // console.warn('===============================  =======================================')
 
             //发送请求
             let promise = new Promise((resolve, reject) => {
                 axios.post(url, data)
                     .then(res => {
                         //相应数据打印
-                        console.log('响应数据：', res.data)
+                        console.log('响应数据：（' + url + '）', res.data)
 
                         //数据统一处理
                         if (res.data.code === 200) {
@@ -32,7 +33,7 @@ export default {
                             this.$message.error(res.data.msg)
                             reject(res.data)
                         }
-                        console.warn('=============================== 请求完成 =======================================')
+                        // console.warn('=============================== 请求完成 =======================================')
                     })
             })
             return promise
