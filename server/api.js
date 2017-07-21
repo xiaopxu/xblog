@@ -114,7 +114,7 @@ router.post('/api/autoSignin', async (req, res) => {
     let nowTime = new Date().getTime(),
         createTime = remember.createTime,
         autoSignAllowTime = 10 * 24 * 3600
-    if(nowTime - createTime > autoSignAllowTime){
+    if((nowTime - createTime) > autoSignAllowTime){
         res.json({
             code: 400,
             data: '',
