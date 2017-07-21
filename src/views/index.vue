@@ -1,6 +1,6 @@
 <template>
     <div id="index">
-        <navbar :isSignin="isSignin" @signout="signout"></navbar>
+        <navbar :isSignin.sync="isSignin"></navbar>
         <div class="content">
             <router-view></router-view>
         </div>
@@ -19,30 +19,30 @@ export default {
         articleCard,
         navbar
     },
-    created() {
-        // this.isSignin = this.getGlobalData('isSignin')
-        // if (this.isSignin) { return }
-        this.post({
-            url: 'api/autoSignin',
-            data: {
-                rememberKey: this.getCookie('rememberKey')
-            }
-        }).then(res => {
+    async created() {
+        this.isSignin = this.getGlobalData('isSignin')
+        if (this.isSignin) { return }
+
+        try{
+            let user = await this.post({
+                url: 'api/autoSignin',
+                data: {
+                    rememberKey: this.getCookie('rememberKey')
+                }
+            })
             console.log('===========免登成功============')
             this.setGlobalData('isSignin', true)
-            this.setGlobalData('userId', res)
+            this.setGlobalData('userId', user)
             this.isSignin = true
-        }).catch(err => {
+        }catch(err){
             this.goPage('/sign', 'sign-in')
-        })
+        }
     },
     mounted() {
 
     },
     methods: {
-        signout(){
-            this.isSignin = false
-        }
+
     }
 }
 </script>

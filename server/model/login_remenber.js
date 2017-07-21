@@ -8,7 +8,11 @@ const loginRememberSchema = new Schema({
   ipAddress: {
     type: String,
     default: getLocalIp()
-  }
+  },
+  createTime: {
+        type: Date,
+        Default: Date.now
+    }
 })
 
 module.exports = mongoose.model('loginRemember', loginRememberSchema, 'loginRemember')

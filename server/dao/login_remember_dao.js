@@ -39,15 +39,16 @@ function findRememberByUserId(userId) {
 }
 
 /**
- * 添加登陆记忆数据 
- * @param {object} newData 新数据 
+ * 添加登陆记忆数据
+ * @param {object} newData 新数据
  * @returns {promise}
  */
 function addRemember(newData) {
   let loginRemember = new model.LoginRemember({
     userId: newData.userId,
     rememberKey: newData.rememberKey,
-    ipAddress: newData.ipAddress
+    ipAddress: newData.ipAddress,
+    createTime: new Date()
   })
   return new Promise((resolve, reject) => {
     loginRemember.save((err, data) => {

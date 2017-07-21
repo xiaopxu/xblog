@@ -55,7 +55,7 @@ export default {
                 })
                 this.delCookie('rememberKey')
                 this.setGlobalData('isSignin', false)
-                this.$emit('signout', false)
+                this.$emit('update:isSignin', false)
             } else if (key === 'setting') {
                 this.goPage('setting')
             }

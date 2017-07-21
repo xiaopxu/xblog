@@ -97,7 +97,10 @@ router.post('/api/signin', async (req, res) => {
 router.post('/api/autoSignin', async (req, res) => {
   let rememberKey = req.body.rememberKey
   try {
+
     let remember = await dao.loginRememberDao.findRememberByKey(rememberKey)
+
+    //存在性验证
     if (remember === null) {
       res.json({
         code: 400,
@@ -105,20 +108,34 @@ router.post('/api/autoSignin', async (req, res) => {
         msg: '请重新登录'
       })
       return
+    }
+
+    //免登超时验证
+    let nowTime = new Date().getTime(),
+        createTime = remember.createTime,
+        autoSignAllowTime = 10 * 24 * 3600
+    if(nowTime - createTime > autoSignAllowTime){
+        res.json({
+            code: 400,
+            data: '',
+            msg: '免登时间已过，请重新登录'
+        })
+        return
+    }
+
+    //ip地址一致性验证
+    if (remember.ipAddress === getLocalIp()) {
+        res.json({
+            code: 200,
+            data: remember.userId,
+            msg: '登陆成功'
+        })
     } else {
-      if (remember.ipAddress === getLocalIp()) {
         res.json({
-          code: 200,
-          data: remember.userId,
-          msg: '登陆成功'
+            code: 400,
+            data: '',
+            msg: '请重新登录'
         })
-      } else {
-        res.json({
-          code: 400,
-          data: '',
-          msg: '请重新登录'
-        })
-      }
     }
   } catch (err) {
     res.json({
