@@ -14,11 +14,12 @@ export default new Router({
       path: '/',
       name: 'index',
       component: Index,
-      children: [{
-        path: '/',
-        name: 'article-list',
-        component: ArticleList
-      },
+      children: [
+        {
+          path: '/',
+          name: 'article-list',
+          component: ArticleList
+        },
         {
           path: '/article-view/:id',
           name: 'article-view',

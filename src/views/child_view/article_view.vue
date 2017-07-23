@@ -3,7 +3,7 @@
         <div class="author">
             <tag value='作者'></tag>
             <span></span>
-            <span class="edit" @click="goPage('/write', $route.params.id)">编辑</span>
+            <span class="edit" @click="goPage('/writer', $route.params.id)">编辑</span>
         </div>
         <div class="article">
             <h3 class="title">{{title}}</h3>

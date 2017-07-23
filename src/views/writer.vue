@@ -47,7 +47,7 @@ export default {
             this.post({
                 url: 'api/saveArticle',
                 data: {
-                    userId: '596049370b747e3a147eee64',
+                    userId: this.getGlobalData('userId'),
                     title: this.title,
                     content: this.rawHtml,
                 }
@@ -61,6 +61,7 @@ export default {
     },
     created() {
         this.articleId = this.$route.params.id
+        console.log('writer page get in')
     },
     async mounted() {
         if (this.articleId) {

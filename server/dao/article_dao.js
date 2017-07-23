@@ -44,10 +44,28 @@ function addArticle(newData) {
     })
   })
 }
+
+function saveArticle(newData) {
+  return new Promise((resolve, reject) => {
+    article.update({
+      '_id': newData._id
+    }, {
+      'content': newData.content
+    }, (err, data) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(data)
+      }
+    })
+  })
+}
+
 const articleDao = {
   getArticleById: getArticleById,
   getAllArticle: getAllArticle,
-  addArticle: addArticle
+  addArticle: addArticle,
+  saveArticle: saveArticle
 }
 
 module.exports = articleDao

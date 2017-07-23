@@ -112,30 +112,30 @@ router.post('/api/autoSignin', async (req, res) => {
 
     //免登超时验证
     let nowTime = new Date().getTime(),
-        createTime = remember.createTime,
-        autoSignAllowTime = 10 * 24 * 3600
-    if((nowTime - createTime) > autoSignAllowTime){
-        res.json({
-            code: 400,
-            data: '',
-            msg: '免登时间已过，请重新登录'
-        })
-        return
+      createTime = remember.createTime,
+      autoSignAllowTime = 10 * 24 * 3600
+    if ((nowTime - createTime) > autoSignAllowTime) {
+      res.json({
+        code: 400,
+        data: '',
+        msg: '免登时间已过，请重新登录'
+      })
+      return
     }
 
     //ip地址一致性验证
     if (remember.ipAddress === getLocalIp()) {
-        res.json({
-            code: 200,
-            data: remember.userId,
-            msg: '登陆成功'
-        })
+      res.json({
+        code: 200,
+        data: remember.userId,
+        msg: '登陆成功'
+      })
     } else {
-        res.json({
-            code: 400,
-            data: '',
-            msg: '请重新登录'
-        })
+      res.json({
+        code: 400,
+        data: '',
+        msg: '请重新登录'
+      })
     }
   } catch (err) {
     res.json({
@@ -158,8 +158,8 @@ router.post('/api/signout', async (req, res) => {
   })
 })
 
-//保存文章
-router.post('/api/saveArticle', async (req, res) => {
+//新建文章
+router.post('/api/addArticle', async (req, res) => {
   let content = req.body.content
   let userId = req.body.userId
   let title = req.body.title
@@ -175,7 +175,31 @@ router.post('/api/saveArticle', async (req, res) => {
     res.json({
       code: 200,
       data: '',
-      msg: '保存成功'
+      msg: '新建文章成功'
+    })
+  } catch (err) {
+    res.json({
+      code: 400,
+      data: '',
+      msg: '服务器错误'
+    })
+  }
+})
+
+//保存文章
+router.post('/api/saveArticle', async (req, res) => {
+  let id = req.body.articleId,
+    content = req.body.content,
+    newData = {
+      _id: id,
+      content: content
+  }
+  try {
+    let newAritcle = await dao.articleDao.saveArticle(newData)
+    res.json({
+      code: 200,
+      data: '',
+      msg: '文章保存成功'
     })
   } catch (err) {
     res.json({
