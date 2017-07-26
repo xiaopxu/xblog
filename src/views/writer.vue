@@ -4,6 +4,8 @@
             <div class="input" v-bind:class="{'full-screen': !showPreview}">
                 <el-input v-model="title" placeholder="标题" class="title-input"></el-input>
                 <div class="toolbar">
+                    <i class="fa fa-repeat fa-lg" aria-hidden="true" v-show="isPublish"></i>
+                    <i class="fa fa-share fa-lg" aria-hidden="true" v-show="!isPublish"></i>
                     <i class="fa fa-floppy-o fa-lg" aria-hidden="true" @click="saveArticle"></i>
                     <i class="fa fa-lg" v-bind:class="{'fa-expand': showPreview, 'fa-compress': !showPreview}" aria-hidden="true" @click="togglePreview"></i>
                     <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
@@ -25,11 +27,12 @@ import 'highlight.js/styles/googlecode.css'
 export default {
     data() {
         return {
-            articleId: '',
-            rawHtml: '',
-            previewHtml: '',
-            title: '',
-            showPreview: true
+            articleId: '',  //文章id
+            rawHtml: '',  //编辑部分
+            previewHtml: '',  //预览部分
+            title: '',  //标题
+            showPreview: true,  //是否预览
+            isPublish: false  //是否已经发布
         }
     },
     components: {
