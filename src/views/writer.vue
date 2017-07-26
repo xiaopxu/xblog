@@ -43,30 +43,40 @@ export default {
         togglePreview() {
             this.showPreview = !this.showPreview
         },
-        saveArticle() {
-            this.post({
+        async saveArticle() {
+
+            let newArticle = await this.post({
                 url: 'api/saveArticle',
                 data: {
-                    userId: this.getGlobalData('userId'),
+                    _id: this.articleId,
                     title: this.title,
                     content: this.rawHtml,
                 }
-            }).then(res => {
+            })
+            if (newArticle) {
                 this.$message({
                     message: '保存成功',
                     type: 'success'
-                });
-            })
+                })
+            }
         }
     },
     created() {
         this.articleId = this.$route.params.id
-        console.log('writer page get in')
     },
     async mounted() {
         if (this.articleId) {
-            let article = await this.post('api/getArticleById')
-            this.rawHtml = article.content
+            let newArticle = await this.post({
+                url: 'api/getArticleById',
+                data: {
+                    _id: this.articleId
+                }
+            })
+            if (newArticle) {
+                this.rawHtml = newArticle.article.content
+                this.title = newArticle.article.title
+                this.previewHtml = marked(this.rawHtml)
+            }
         }
         marked.setOptions({
             highlight: function (code) {

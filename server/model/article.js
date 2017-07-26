@@ -2,9 +2,23 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const articleSchema = new Schema({
-    userId: String,
-    title: String,
-    content: String,
+    userId: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    title: {
+        type: String,
+        Default: ''
+    },
+    content: {
+        type: String,
+        Default: ''
+    },
+    publish: {
+        type: Boolean,
+        Default: false
+    },
     createTime: {
         type: Date,
         Default: Date.now

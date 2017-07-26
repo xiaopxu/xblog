@@ -23,7 +23,7 @@ export default {
         this.isSignin = this.getGlobalData('isSignin')
         if (this.isSignin) { return }
 
-        try{
+        try {
             let user = await this.post({
                 url: 'api/autoSignin',
                 data: {
@@ -34,8 +34,8 @@ export default {
             this.setGlobalData('isSignin', true)
             this.setGlobalData('userId', user)
             this.isSignin = true
-        }catch(err){
-            this.goPage('/sign', 'sign-in')
+        } catch (err) {
+            // this.goPage('/sign', 'sign-in')
         }
     },
     mounted() {

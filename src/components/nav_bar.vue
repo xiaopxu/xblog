@@ -19,15 +19,9 @@
                     <el-menu-item index="setting">设置</el-menu-item>
                     <el-menu-item index="signout" v-show="isSignin">注销</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="sign" v-show="!isSignin">
-                    <router-link to="/sign/sign-in">登陆</router-link>
-                </el-menu-item>
-                <el-menu-item index="sign" v-show="!isSignin">
-                    <router-link to="/sign/sign-up">注册</router-link>
-                </el-menu-item>
-                <el-menu-item index="writer">
-                    <router-link to="/writer">写作</router-link>
-                </el-menu-item>
+                <el-menu-item index="signin" v-show="!isSignin">登陆</el-menu-item>
+                <el-menu-item index="signup" v-show="!isSignin">注册</el-menu-item>
+                <el-menu-item index="writer">写作</el-menu-item>
             </div>
         </el-menu>
     </div>
@@ -46,6 +40,7 @@ export default {
 
         },
         async handleSelect(key, keyPath) {
+            console.log(key)
             if (key === 'signout') {
                 await this.post({
                     url: 'api/signout',
@@ -58,8 +53,23 @@ export default {
                 this.$emit('update:isSignin', false)
             } else if (key === 'setting') {
                 this.goPage('setting')
+            } else if (key === 'signin') {
+                this.goPage('/sign', 'sign-in')
+            } else if (key === 'signup') {
+                this.goPage('/sign', 'sign-up')
+            } else if (key === 'writer') {
+                let newArticle = await this.post({
+                    url: 'api/addArticle',
+                    data: {
+                        userId: this.getGlobalData('userId')
+                    }
+                })
+                if (newArticle) {
+                    this.goPage('/writer', newArticle._id)
+                }
             }
-        }
+        },
+
     }
 }
 </script>
