@@ -31,7 +31,9 @@
                 </el-submenu>
                 <el-menu-item index="signin" v-show="!isSignin">登陆</el-menu-item>
                 <el-menu-item index="signup" v-show="!isSignin">注册</el-menu-item>
-                <el-menu-item index="writer">写作</el-menu-item>
+                <el-menu-item index="writer">
+                    <i class="fa fa-pencil"></i>&nbsp;&nbsp;写作
+                </el-menu-item>
             </div>
         </el-menu>
     </div>
