@@ -44,13 +44,13 @@ export default {
         return {
             activeIndex: 'index',
             searchKey: '',
-            isSign: false,
+            isSignin: false,
             userName: ''
         }
     },
     async created() {
         this.isSignin = this.getGlobalData('isSignin')
-        this.userName = this.getGlobalData('userName')
+        this.userName = this.getStorage('userName')
         if (this.isSignin) { return }
 
         try {
@@ -65,7 +65,7 @@ export default {
             this.setGlobalData('userId', user._id)
             this.isSignin = true
             this.userName = user.userName
-            this.setGlobalData('userName', user.userName)
+            this.setStorage('userName', user.userName)
         } catch (err) {
             // this.goPage('/sign', 'sign-in')
         }

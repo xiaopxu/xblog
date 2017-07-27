@@ -15,6 +15,7 @@ import common from './util/common.js'
 import filter from './util/filter.js'
 import cookie from './util/cookie.js'
 import globalData from './util/global_data.js'
+import storage from './util/storage.js'
 
 Vue.use(element);
 window.$ = $
@@ -26,6 +27,7 @@ Vue.use(common);
 Vue.use(filter);
 Vue.use(cookie);
 Vue.use(globalData);
+Vue.use(storage);
 
 Vue.config.productionTip = false
 
