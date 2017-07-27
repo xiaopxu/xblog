@@ -34,4 +34,12 @@ a {
     width: 100%;
     min-width: 690px;
 }
+
+.f12 {
+    font-size: 12px;
+}
+
+.f14 {
+    font-size: 14px;
+}
 </style>

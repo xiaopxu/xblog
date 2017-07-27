@@ -1,6 +1,7 @@
 <template>
     <div id="index">
-        <navbar :isSignin.sync="isSignin" :userName="userName"></navbar>
+        <!-- <navbar :isSignin.sync="isSignin" :userName.sync='userName'></navbar> -->
+        <navbar></navbar>
         <div class="content">
             <router-view></router-view>
         </div>
@@ -20,26 +21,27 @@ export default {
         articleCard,
         navbar
     },
-    async created() {
-        this.isSignin = this.getGlobalData('isSignin')
-        if (this.isSignin) { return }
+    // async created() {
+    //     this.isSignin = this.getGlobalData('isSignin')
+    //     this.userName = this.getGlobalData('userName')
+    //     if (this.isSignin) { return }
 
-        try {
-            let user = await this.post({
-                url: 'api/autoSignin',
-                data: {
-                    rememberKey: this.getCookie('rememberKey')
-                }
-            })
-            console.log('===========免登成功============')
-            this.setGlobalData('isSignin', true)
-            this.setGlobalData('userId', user._id)
-            this.isSignin = true
-            this.userName = user.userName
-        } catch (err) {
-            // this.goPage('/sign', 'sign-in')
-        }
-    },
+    //     try {
+    //         let user = await this.post({
+    //             url: 'api/autoSignin',
+    //             data: {
+    //                 rememberKey: this.getCookie('rememberKey')
+    //             }
+    //         })
+    //         console.log('===========免登成功============')
+    //         this.setGlobalData('isSignin', true)
+    //         this.setGlobalData('userId', user._id)
+    //         this.isSignin = true
+    //         this.setGlobalData('userName', user.userName)
+    //     } catch (err) {
+    //         // this.goPage('/sign', 'sign-in')
+    //     }
+    // },
     mounted() {
 
     },

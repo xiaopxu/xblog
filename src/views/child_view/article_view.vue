@@ -1,12 +1,16 @@
 <template>
     <div id="view">
-        <div class="author">
-            <tag value='作者'></tag>
-            <span></span>
-            <span class="edit" @click="goPage('/writer', $route.params.id)">编辑</span>
+        <div class="artical-info">
+            <div class="info">
+                <tag value='作者'></tag>
+                <span>{{userName}}</span>
+                </br>
+                <span class="f12">{{lastEditDate | moment}}</span>
+            </div>
+            <editBtn text="编辑文章" :articleId="$route.params.id"></editBtn>
         </div>
         <div class="article">
-            <h3 class="title">{{title}}</h3>
+            <h1 class="title">{{title}}</h1>
             <div class="content" v-html="view"></div>
         </div>
     </div>
@@ -14,15 +18,18 @@
 <script>
 import marked from 'marked'
 import tag from './../../items/tag'
+import editBtn from './../../items/btn_edit'
 export default {
     data() {
         return {
             title: '',
-            view: ''
+            view: '',
+            userName: '',
+            lastEditDate: ''
         }
     },
     components: {
-        tag
+        tag, editBtn
     },
     async mounted() {
         let viewData = await this.post({
@@ -32,12 +39,16 @@ export default {
             }
         })
         this.title = viewData.article.title
+        this.lastEditDate = viewData.article.createTime
+        this.userName = viewData.user.userName
         this.view = marked(viewData.article.content)
     }
 }
 </script>
 <style lang="less">
 #view {
+    max-width: 620px;
+    margin: 0 auto;
     .content {
         text-align: left;
         code {
@@ -69,9 +80,19 @@ export default {
             padding-left: 10px;
         }
     }
-    .author {
+    .artical-info {
+        text-align: left;
+        overflow: hidden;
+        margin: 30px 0 40px;
+        .info {
+            float: left;
+        }
         .edit {
             cursor: pointer
+        }
+        #tag {
+            margin: 5px 0;
+            margin-right: 5px;
         }
     }
 }

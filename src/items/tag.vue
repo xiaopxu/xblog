@@ -23,5 +23,6 @@ export default {
     color: #ea6f5a;
     border: 1px solid #ea6f5a;
     border-radius: 3px;
+    text-align: center;
 }
 </style>
