@@ -85,7 +85,7 @@ export default {
                 })
                 this.delCookie('rememberKey')
                 this.setGlobalData('isSignin', false)
-                this.$emit('update:isSignin', false)
+                this.isSignin = false
             } else if (key === 'setting') {
                 this.goPage('setting')
             } else if (key === 'signin') {
