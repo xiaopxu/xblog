@@ -21,27 +21,6 @@ export default {
         articleCard,
         navbar
     },
-    // async created() {
-    //     this.isSignin = this.getGlobalData('isSignin')
-    //     this.userName = this.getGlobalData('userName')
-    //     if (this.isSignin) { return }
-
-    //     try {
-    //         let user = await this.post({
-    //             url: 'api/autoSignin',
-    //             data: {
-    //                 rememberKey: this.getCookie('rememberKey')
-    //             }
-    //         })
-    //         console.log('===========免登成功============')
-    //         this.setGlobalData('isSignin', true)
-    //         this.setGlobalData('userId', user._id)
-    //         this.isSignin = true
-    //         this.setGlobalData('userName', user.userName)
-    //     } catch (err) {
-    //         // this.goPage('/sign', 'sign-in')
-    //     }
-    // },
     mounted() {
 
     },

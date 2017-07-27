@@ -75,7 +75,6 @@ export default {
 
         },
         async handleSelect(key, keyPath) {
-            console.log(key)
             if (key === 'signout') {
                 await this.post({
                     url: 'api/signout',
@@ -86,6 +85,7 @@ export default {
                 this.delCookie('rememberKey')
                 this.setGlobalData('isSignin', false)
                 this.isSignin = false
+                this.goPage('/')
             } else if (key === 'setting') {
                 this.goPage('setting')
             } else if (key === 'signin') {
