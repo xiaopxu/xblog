@@ -14,8 +14,8 @@
             </div>
 
             <div class="nav-right">
-                <el-submenu index="user">
-                    <template slot="title">用户</template>
+                <el-submenu index="user" v-show="isSignin">
+                    <template slot="title">{{userName}}</template>
                     <el-menu-item index="setting">
                         <i class="fa fa-user"></i>&nbsp;&nbsp;我的主页
                     </el-menu-item>
@@ -44,7 +44,7 @@ export default {
             searchKey: ''
         }
     },
-    props: ['isSignin'],
+    props: ['isSignin', 'userName'],
     methods: {
         doSearch() {
 

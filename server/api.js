@@ -95,7 +95,10 @@ router.post('/api/autoSignin', async(req, res) => {
 
         //ip地址一致性验证
         if (remember.ipAddress === getLocalIp()) {
-            res.json({ code: 200, data: remember.userId, msg: '登陆成功' })
+            let user = await dao.userDao.getUserById(remember.userId)
+            if (user) {
+                res.json({ code: 200, data: user, msg: '登陆成功' })
+            }
         } else {
             res.json({ code: 400, data: '', msg: '请重新登录' })
         }

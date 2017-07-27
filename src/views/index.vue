@@ -1,6 +1,6 @@
 <template>
     <div id="index">
-        <navbar :isSignin.sync="isSignin"></navbar>
+        <navbar :isSignin.sync="isSignin" :userName="userName"></navbar>
         <div class="content">
             <router-view></router-view>
         </div>
@@ -12,7 +12,8 @@ import navbar from './../components/nav_bar'
 export default {
     data() {
         return {
-            isSignin: false
+            isSignin: false,
+            userName: ''
         }
     },
     components: {
@@ -32,8 +33,9 @@ export default {
             })
             console.log('===========免登成功============')
             this.setGlobalData('isSignin', true)
-            this.setGlobalData('userId', user)
+            this.setGlobalData('userId', user._id)
             this.isSignin = true
+            this.userName = user.userName
         } catch (err) {
             // this.goPage('/sign', 'sign-in')
         }

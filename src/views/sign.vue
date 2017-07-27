@@ -28,6 +28,11 @@
                             <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                         </template>
                     </el-input>
+                    <el-input placeholder="确认密码" v-model="confirmPwdword">
+                        <template slot="prepend">
+                            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                        </template>
+                    </el-input>
                     <el-button type="success" @click="signUp">注册</el-button>
                 </div>
             </el-tab-pane>
@@ -41,7 +46,8 @@ export default {
         return {
             signType: 'sign-in',
             userName: '',
-            pwdword: ''
+            pwdword: '',
+            confirmPwdword: ''
         }
     },
     mounted() {
@@ -55,6 +61,14 @@ export default {
             }
             if (this.pwdword === '') {
                 this.$message.error('密码不能为空')
+                return
+            }
+            if (this.pwdword === '') {
+                this.$message.error('确认密码不能为空')
+                return
+            }
+            if (this.pwdword !== this.confirmPwdword) {
+                this.$message.error('两次密码不一致，请重新输入')
                 return
             }
             let user = await this.post({
