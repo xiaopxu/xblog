@@ -16,8 +16,18 @@
             <div class="nav-right">
                 <el-submenu index="user">
                     <template slot="title">用户</template>
-                    <el-menu-item index="setting">设置</el-menu-item>
-                    <el-menu-item index="signout" v-show="isSignin">注销</el-menu-item>
+                    <el-menu-item index="setting">
+                        <i class="fa fa-user"></i>&nbsp;&nbsp;我的主页
+                    </el-menu-item>
+                    <el-menu-item index="setting">
+                        <i class="fa fa-bookmark"></i>&nbsp;&nbsp;收藏的文章
+                    </el-menu-item>
+                    <el-menu-item index="setting">
+                        <i class="fa fa-cog"></i>&nbsp;&nbsp;用户设置
+                    </el-menu-item>
+                    <el-menu-item index="signout" v-show="isSignin">
+                        <i class="fa fa-sign-out"></i>&nbsp;&nbsp;注销
+                    </el-menu-item>
                 </el-submenu>
                 <el-menu-item index="signin" v-show="!isSignin">登陆</el-menu-item>
                 <el-menu-item index="signup" v-show="!isSignin">注册</el-menu-item>
@@ -78,6 +88,7 @@ export default {
     .el-menu {
         .nav-right {
             float: right;
+            text-align: left;
         }
         .nav-left {
             float: left;

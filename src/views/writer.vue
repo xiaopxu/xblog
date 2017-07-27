@@ -5,7 +5,7 @@
                 <el-input v-model="title" placeholder="标题" class="title-input"></el-input>
                 <div class="toolbar">
                     <i class="fa fa-repeat fa-lg" aria-hidden="true" v-show="isPublish"></i>
-                    <i class="fa fa-share fa-lg" aria-hidden="true" v-show="!isPublish"></i>
+                    <i class="fa fa-share fa-lg" aria-hidden="true" v-show="!isPublish" @click="publishArticle"></i>
                     <i class="fa fa-floppy-o fa-lg" aria-hidden="true" @click="saveArticle"></i>
                     <i class="fa fa-lg" v-bind:class="{'fa-expand': showPreview, 'fa-compress': !showPreview}" aria-hidden="true" @click="togglePreview"></i>
                     <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
@@ -59,6 +59,20 @@ export default {
             if (newArticle) {
                 this.$message({
                     message: '保存成功',
+                    type: 'success'
+                })
+            }
+        },
+        async publishArticle() {
+            let res = await this.post({
+                url: 'api/publishArticle',
+                data: {
+                    _id: this.articleId
+                }
+            })
+            if (res) {
+                this.$message({
+                    message: '发布成功',
                     type: 'success'
                 })
             }

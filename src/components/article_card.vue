@@ -3,7 +3,7 @@
         <el-card class="box-card" v-for="article in articleList" :key="article">
             <div class="info">
                 <span class="author"></span>
-                <span class="time">{{article.createTime | moment}}</span>
+                <span class="time" @click="goPage('/article-view',article._id)">{{article.createTime | moment}}</span>
             </div>
             <div class="article-title clearfix">
                 <span style="line-height: 36px;" @click="goPage('/article-view',article._id)">{{article.title}}</span>

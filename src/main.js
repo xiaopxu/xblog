@@ -18,7 +18,7 @@ import globalData from './util/global_data.js'
 
 Vue.use(element);
 window.$ = $
-// Vue.use(iView);
+    // Vue.use(iView);
 
 Vue.use(http);
 Vue.use(validate);
@@ -30,6 +30,11 @@ Vue.use(globalData);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({el: '#app', router, template: '<App/>', components: {
+new Vue({
+    el: '#app',
+    router,
+    template: '<App/>',
+    components: {
         App
-    }})
+    }
+})
