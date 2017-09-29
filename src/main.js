@@ -3,11 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Vuex from 'vuex'
 // import iView from 'iview' import 'iview/dist/styles/iview.css'
 import element from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import './../static/font-awesome-4.7.0/css/font-awesome.min.css'
 import $ from 'jquery'
+
+//引入vuex仓库
+import store from './store/index.js'
+
 //引入自定义插件
 import http from './util/http.js'
 import validate from './util/validate.js'
@@ -17,9 +22,10 @@ import cookie from './util/cookie.js'
 import globalData from './util/global_data.js'
 import storage from './util/storage.js'
 
+//挂载插件
 Vue.use(element);
 window.$ = $
-    // Vue.use(iView);
+// Vue.use(iView);
 
 Vue.use(http);
 Vue.use(validate);
@@ -35,6 +41,7 @@ Vue.config.productionTip = false
 new Vue({
     el: '#app',
     router,
+    store,
     template: '<App/>',
     components: {
         App

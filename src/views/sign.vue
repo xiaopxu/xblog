@@ -112,8 +112,10 @@ export default {
             }
             //保存新的key
             this.setCookie('rememberKey', user.rememberKey)
-            this.setGlobalData('isSignin', true)
-            this.setGlobalData('userId', user.userId)
+            // this.setGlobalData('isSignin', true)
+            // this.setGlobalData('userId', user.userId)
+            this.$store.commit('setSigninStatus', {isSingin: true})
+            this.$store.commit('setUserId', {userId: user._id})
             this.goPage('/')
         }
     }

@@ -47,7 +47,7 @@ export default {
 </script>
 <style lang="less">
 #view {
-    max-width: 620px;
+    max-width: 70%;
     margin: 0 auto;
     .content {
         text-align: left;
@@ -78,6 +78,19 @@ export default {
             border-left: solid 8px #f1f1f1;
             margin-left: 0;
             padding-left: 10px;
+        }
+        table tr th, table tr td {
+            border:1px solid #ddd;
+            padding: 0.5em;
+            line-height: 1.6;
+            vertical-align: middle;
+        }
+        table{
+            border-collapse: collapse;
+            border: none;
+        }
+        ul{
+            margin-bottom: 1.1em;
         }
     }
     .artical-info {

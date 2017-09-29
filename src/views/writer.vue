@@ -1,5 +1,5 @@
 <template>
-    <div id="writer">
+    <div id="writer" @keydown.ctrl.83.prevent="saveArticle">
         <div class="editer">
             <div class="input" v-bind:class="{'full-screen': !showPreview}">
                 <el-input v-model="title" placeholder="标题" class="title-input"></el-input>
@@ -11,9 +11,9 @@
                     <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
                     <i class="fa fa-home fa-lg" aria-hidden="true" @click="goPage('/')"></i>
                 </div>
-                <textarea v-model="rawHtml" @input="renderHtml" class="form-control"></textarea>
+                <textarea id="input-area" v-model="rawHtml" @input="renderHtml" class="form-control" @scroll="scroll"></textarea>
             </div>
-            <div class="preview" v-show="showPreview">
+            <div class="preview" id="preview-area" v-show="showPreview">
                 <div class="pre-title">{{title}}</div>
                 <div class="pre-content" v-html="previewHtml"></div>
             </div>
@@ -46,8 +46,15 @@ export default {
         togglePreview() {
             this.showPreview = !this.showPreview
         },
-        async saveArticle() {
+        scroll() {
+            // console.log('111111')
+            let inputArea = document.querySelector('#input-area'),
+                previewArea = document.querySelector('#preview-area'),
+                previewContent = document.querySelector('#preview-area').querySelector('.pre-content')
 
+            previewArea.scrollTop = inputArea.scrollTop / inputArea.offsetHeight * (previewArea.offsetHeight - 80)
+        },
+        async saveArticle(e) {
             let newArticle = await this.post({
                 url: 'api/saveArticle',
                 data: {
@@ -201,6 +208,19 @@ html,
             border-left: solid 8px #f1f1f1;
             margin-left: 0;
             padding-left: 10px;
+        }
+        table tr th, table tr td {
+            border:1px solid #ddd;
+            padding: 0.5em;
+            line-height: 1.6;
+            vertical-align: middle;
+        }
+        table{
+            border-collapse: collapse;
+            border: none;
+        }
+        ul{
+            margin-bottom: 1.1em;
         }
     }
 }

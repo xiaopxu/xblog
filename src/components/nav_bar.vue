@@ -49,8 +49,10 @@ export default {
         }
     },
     async created() {
-        this.isSignin = this.getGlobalData('isSignin')
+        // this.isSignin = this.getGlobalData('isSignin')
         this.userName = this.getStorage('userName')
+        this.isSignin = this.$store.state.isSingin
+        // this.userName = this.$store.state.userName
         if (this.isSignin) { return }
 
         try {
@@ -61,8 +63,10 @@ export default {
                 }
             })
             console.log('===========免登成功============')
-            this.setGlobalData('isSignin', true)
-            this.setGlobalData('userId', user._id)
+            // this.setGlobalData('isSignin', true)
+            // this.setGlobalData('userId', user._id)
+            this.$store.commit('setSigninStatus', {isSingin: true})
+            this.$store.commit('setUserId', {userId: user._id})
             this.isSignin = true
             this.userName = user.userName
             this.setStorage('userName', user.userName)
@@ -79,7 +83,8 @@ export default {
                 await this.post({
                     url: 'api/signout',
                     data: {
-                        userId: this.getGlobalData('userId')
+                        // userId: this.getGlobalData('userId')
+                        userId: this.$store.state.userId
                     }
                 })
                 this.delCookie('rememberKey')
@@ -96,7 +101,8 @@ export default {
                 let newArticle = await this.post({
                     url: 'api/addArticle',
                     data: {
-                        userId: this.getGlobalData('userId')
+                        // userId: this.getGlobalData('userId')
+                        userId: this.$store.state.userId
                     }
                 })
                 if (newArticle) {
