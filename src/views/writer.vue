@@ -102,11 +102,26 @@ export default {
                 this.previewHtml = marked(this.rawHtml)
             }
         }
+
         marked.setOptions({
+            renderer: new marked.Renderer(),
+            gfm: true,
+            tables: true,
+            breaks: false,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false,
             highlight: function (code) {
                 return require('highlight.js').highlightAuto(code).value;
             }
         });
+
+        let renderer = new marked.Renderer()
+        renderer.table = function(header, body){
+            return `<table class="pre-table">${header}${body}</table>`
+        }
+
         $('.input textarea').css('height', $(window).height() - 157)
         $('.preview').css('height', $(window).height() - 60)
     }
@@ -181,14 +196,14 @@ html,
             width: 94%;
             padding: 0 3%;
         }
-        code {
-            padding: 2px 4px;
-            background-color: #f6f6f6;
-            border: none;
-            color: #657b83;
-            font-size: 12px;
-            white-space: pre-wrap;
-        }
+        // code {
+        //     padding: 2px 4px;
+        //     background-color: #f6f6f6;
+        //     border: none;
+        //     color: #657b83;
+        //     font-size: 12px;
+        //     white-space: pre-wrap;
+        // }
         pre {
             display: block;
             padding: 9.5px;
@@ -204,24 +219,24 @@ html,
             border-radius: 0;
             background: #f6f6f6;
         }
-        blockquote {
-            border-left: solid 8px #f1f1f1;
-            margin-left: 0;
-            padding-left: 10px;
-        }
-        table tr th, table tr td {
-            border:1px solid #ddd;
-            padding: 0.5em;
-            line-height: 1.6;
-            vertical-align: middle;
-        }
-        table{
+        // blockquote {
+        //     border-left: solid 8px #f1f1f1;
+        //     margin-left: 0;
+        //     padding-left: 10px;
+        // }
+        .pre-table{
             border-collapse: collapse;
             border: none;
+            tr th, tr td{
+                border:1px solid #ddd;
+                padding: 0.5em;
+                line-height: 1.6;
+                vertical-align: middle;
+            }
         }
-        ul{
-            margin-bottom: 1.1em;
-        }
+        // ul{
+        //     margin-bottom: 1.1em;
+        // }
     }
 }
 </style>
