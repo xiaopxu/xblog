@@ -66,8 +66,9 @@ export default {
             if (newArticle) {
                 this.$message({
                     message: '保存成功',
-                    type: 'success'
-                })
+                    customClass: 'save-success',
+                    iconClass: 'none'
+                });
             }
         },
         async publishArticle() {

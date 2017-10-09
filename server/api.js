@@ -147,7 +147,7 @@ router.post('/api/saveArticle', async(req, res) => {
         }
     try {
         let newAritcle = await dao.articleDao.saveArticle(newData)
-        res.json({ code: 200, data: '', msg: '文章保存成功' })
+        res.json({ code: 200, data: '文章保存成功', msg: '文章保存成功' })
     } catch (err) {
         res.json({ code: 400, data: '', msg: '服务器错误' })
     }

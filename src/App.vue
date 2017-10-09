@@ -42,4 +42,15 @@ a {
 .f14 {
     font-size: 14px;
 }
+
+.save-success{
+  background: #000;
+  opacity: 0.4;
+  min-width: 100px;
+}
+.save-success p{
+  text-align: center;
+  margin: 0 auto;
+  color: #fff;
+}
 </style>
